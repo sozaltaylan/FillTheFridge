@@ -129,8 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c0c96b07bebcae4996a8551a580367d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destinationPos: {x: 0.147, y: 0.446, z: -0.366}
-  rotationPos: {x: 0, y: 87.77, z: 68.51}
+  destinationPos: {x: 0.132, y: 0.595, z: -0.021}
+  rotationPos: {x: 0, y: 86.334, z: 67.624}
   coll: {fileID: 3077764497420431663}
 --- !u!65 &3077764497420431663
 BoxCollider:

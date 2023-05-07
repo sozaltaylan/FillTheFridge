@@ -12,18 +12,23 @@ namespace ColorAndFill.Managers
     {
         #region Variables
 
-        private Vector3 _mousefirstPosition;
-        private Vector3 _mouseHoldPosition;
+        private float downTime;
+        private float upTime;
+        private float clickDuration;
 
-        private Ray _ray;
-        private RaycastHit _hit;
+        private bool isClicking;
 
         #endregion
         #region Methods
-      
+
         private void Update()
         {
             SetInput();
+
+            if (isClicking)
+                clickDuration = Time.time - downTime;
+
+            Debug.Log(clickDuration);
         }
 
         private void SetInput()
@@ -32,37 +37,54 @@ namespace ColorAndFill.Managers
             {
                 SetClick();
             }
-            else if (Input.GetMouseButton(0))
+            else if (Input.GetMouseButtonUp(0))
             {
-
+                SetClickUp();
             }
-            
+
         }
 
-        public void SetClick()
+        private void SetClick()
         {
-            _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            downTime = Time.time;
+            isClicking = true;
 
-            if (Physics.Raycast(_ray, out _hit))
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                if (_hit.collider.TryGetComponent(out BoxController box))
+                if (hit.collider.TryGetComponent(out BoxController box))
                 {
                     if (!box.IsActive)
-                    {
                         box.OpenBox();
-                    }
                     else
-                    {
                         box.CloseBox();
-                    }
                 }
-                if (_hit.collider.TryGetComponent(out DoorController door))
-                {
+                else if (hit.collider.TryGetComponent(out DoorController door))
                     door.OpenDoor();
+
+                else if (hit.collider.TryGetComponent(out ItemBoxController itemBox))
+                {
+                    if (!itemBox.IsOpen && clickDuration > .2)
+                        itemBox.OpenItemBox();
+                    else
+                        itemBox.CloseItemBox();
                 }
             }
         }
-        
+
+        private void SetClickUp()
+        {
+            upTime = Time.time;
+            isClicking = false;
+
+            clickDuration = upTime - downTime;
+        }
+
+
+
     }
-    #endregion
 }
+
+#endregion
