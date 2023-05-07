@@ -28,7 +28,6 @@ namespace ColorAndFill.Managers
             if (isClicking)
                 clickDuration = Time.time - downTime;
 
-            Debug.Log(clickDuration);
         }
 
         private void SetInput()
@@ -41,6 +40,7 @@ namespace ColorAndFill.Managers
             {
                 SetClickUp();
             }
+            else if (Input.GetMouseButton(0)) { }
 
         }
 
@@ -58,8 +58,6 @@ namespace ColorAndFill.Managers
                 {
                     if (!box.IsActive)
                         box.OpenBox();
-                    else
-                        box.CloseBox();
                 }
                 else if (hit.collider.TryGetComponent(out DoorController door))
                     door.OpenDoor();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ColorAndFill.Exceptions;
 using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 namespace ColorAndFill.Managers
 {
@@ -12,15 +13,7 @@ namespace ColorAndFill.Managers
 
         [SerializeField] private GameObject content;
 
-        [SerializeField] private ScrollView scroll;
-
-        private bool isActive;
-
-
-        #region Properties
-        public bool IsActive => isActive;
-
-        #endregion
+        [SerializeField] private ScrollRect scroll;
 
         #endregion
         #region Methods
@@ -45,7 +38,13 @@ namespace ColorAndFill.Managers
             return contentList;
         }
 
+        public bool Active()
+        {
+            bool isActive = scroll.velocity.x > 0 ? true : false;
+            return isActive;
+        }
 
+       
         #endregion
 
 
