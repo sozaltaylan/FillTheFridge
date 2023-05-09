@@ -1,0 +1,35 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using ColorAndFill.Exceptions;
+using DG.Tweening;
+
+namespace ColorAndFill.Managers
+{
+    public class UIManager : MonoSingleton<UIManager>
+    {
+        #region Variables
+
+        [SerializeField] private GameObject okButton;
+
+        [SerializeField] private float endValue;
+        [SerializeField] private float duration;
+
+        #endregion
+
+        #region Methods
+
+        public void OpenOkButton()
+        {
+            okButton.transform.DOMoveX(endValue, duration);
+        }
+
+        public void CloseOkButton()
+        {
+            okButton.transform.DOMoveX(-endValue, duration);
+        }
+        #endregion
+
+    }
+
+}

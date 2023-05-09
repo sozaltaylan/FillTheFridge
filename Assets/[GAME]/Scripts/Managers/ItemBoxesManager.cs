@@ -1,11 +1,12 @@
 using ColorAndFill.Controllers;
 using System.Collections.Generic;
 using UnityEngine;
+using ColorAndFill.Exceptions;
 
 
 namespace ColorAndFill.Managers
 {
-    public class ItemBoxesManager : MonoBehaviour
+    public class ItemBoxesManager : MonoSingleton<ItemBoxesManager>
     {
         #region Variables
 
@@ -20,14 +21,17 @@ namespace ColorAndFill.Managers
             itemBoxes.AddRange(list);
         }
 
-        private void SetBoxesCollider()
+        public void CloseOpenedItemBox()
         {
             for (int i = 0; i < itemBoxes.Count; i++)
             {
-                var box = itemBoxes[i];
-                
+                var itemBox = itemBoxes[i];
+                if (itemBox.IsOpen)
+                {
+                    itemBox.CloseItemBox();
+                }
             }
-        }
+        }      
         #endregion
 
 

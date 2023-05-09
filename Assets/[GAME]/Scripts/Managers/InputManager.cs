@@ -57,7 +57,10 @@ namespace ColorAndFill.Managers
                 if (hit.collider.TryGetComponent(out BoxController box))
                 {
                     if (!box.IsActive)
+                    {
                         box.OpenBox();
+                        UIManager.Instance.OpenOkButton();
+                    }
                 }
                 else if (hit.collider.TryGetComponent(out DoorController door))
                     door.OpenDoor();
@@ -65,7 +68,10 @@ namespace ColorAndFill.Managers
                 else if (hit.collider.TryGetComponent(out ItemBoxController itemBox))
                 {
                     if (!itemBox.IsOpen && clickDuration > .2)
+                    {
+                        ItemBoxesManager.Instance.CloseOpenedItemBox();
                         itemBox.OpenItemBox();
+                    }
                     else
                         itemBox.CloseItemBox();
                 }
