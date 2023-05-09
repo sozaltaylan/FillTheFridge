@@ -45,7 +45,7 @@ namespace ColorAndFill.Managers
 
         public bool IsEmpty()
         {
-            bool isEmpty = default;
+            bool isEmpty = true;
 
             for (int i = 0; i < boxes.Count; i++)
             {
