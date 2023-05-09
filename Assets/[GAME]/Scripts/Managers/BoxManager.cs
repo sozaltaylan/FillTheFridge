@@ -43,7 +43,20 @@ namespace ColorAndFill.Managers
         }
 
 
+        public bool IsEmpty()
+        {
+            bool isEmpty = default;
 
+            for (int i = 0; i < boxes.Count; i++)
+            {
+                var box = boxes[i];
+                if (box.IsActive)
+                {
+                    isEmpty = box.IsEmpty();        
+                }
+            }
+            return isEmpty;
+        }
 
 
 

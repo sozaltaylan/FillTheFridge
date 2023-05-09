@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ColorAndFill.Exceptions;
 using ColorAndFill.Controllers;
+using ColorAndFill.Managers;
 
 namespace ColorAndFill.Managers
 {
@@ -60,6 +61,11 @@ namespace ColorAndFill.Managers
                     {
                         box.OpenBox();
                         UIManager.Instance.OpenOkButton();
+                    }
+                    else if (box.IsActive)
+                    {
+                        box.CreateItem(hit.transform.position);
+                        ItemBoxesManager.Instance.DestroyCreatedItem();
                     }
                 }
                 else if (hit.collider.TryGetComponent(out DoorController door))

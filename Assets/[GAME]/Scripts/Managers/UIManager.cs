@@ -11,6 +11,7 @@ namespace ColorAndFill.Managers
         #region Variables
 
         [SerializeField] private GameObject okButton;
+        [SerializeField] private GameObject cancelButton;
 
         [SerializeField] private float endValue;
         [SerializeField] private float duration;
@@ -28,6 +29,27 @@ namespace ColorAndFill.Managers
         {
             okButton.transform.DOMoveX(-endValue, duration);
         }
+        public void OpenCancelButton()
+        {
+            cancelButton.transform.DOMoveX(endValue, duration);
+        }
+        public void CloseCancelButton()
+        {
+            cancelButton.transform.DOMoveX(-endValue, duration);
+        }
+        private void Update()
+        {
+            if (!BoxManager.Instance.IsEmpty())
+            {
+                OpenCancelButton();
+            }
+            else
+            {
+                CloseCancelButton();
+            }
+            
+        }
+
         #endregion
 
     }

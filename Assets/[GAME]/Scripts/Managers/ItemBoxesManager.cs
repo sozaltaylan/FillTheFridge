@@ -31,7 +31,41 @@ namespace ColorAndFill.Managers
                     itemBox.CloseItemBox();
                 }
             }
-        }      
+        }
+
+        public ItemController GetItem()
+        {
+            ItemController item = default;
+
+            for (int i = 0; i < itemBoxes.Count; i++)
+            {
+                var itemBox = itemBoxes[i];
+                if (itemBox.IsOpen)
+                {
+                    item = itemBox.GetItem();
+                }
+            }
+            return item;
+        }
+
+        public void DestroyCreatedItem()
+        {
+          
+            for (int i = 0; i < itemBoxes.Count; i++)
+            {
+                var itemBox = itemBoxes[i];
+
+                if (itemBox.IsOpen)
+                {
+                    itemBox.DestroyItem();
+                    
+                }
+
+
+            }
+
+
+        }
         #endregion
 
 
